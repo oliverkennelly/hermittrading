@@ -1,0 +1,164 @@
+[
+    {
+        "model": "tradeapi.materialprice",
+        "pk": 1,
+        "fields": {
+          "material": 1,
+          "town": 1,
+          "max_price": 3
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 2,
+        "fields": {
+          "material": 1,
+          "town": 2,
+          "max_price": 4
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 3,
+        "fields": {
+          "material": 1,
+          "town": 3,
+          "max_price": 2
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 4,
+        "fields": {
+          "material": 2,
+          "town": 1,
+          "max_price": 7
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 5,
+        "fields": {
+          "material": 2,
+          "town": 2,
+          "max_price": 1
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 6,
+        "fields": {
+          "material": 2,
+          "town": 3,
+          "max_price": 4
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 7,
+        "fields": {
+          "material": 3,
+          "town": 1,
+          "max_price": 1
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 8,
+        "fields": {
+          "material": 3,
+          "town": 2,
+          "max_price": 3
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 9,
+        "fields": {
+          "material": 3,
+          "town": 3,
+          "max_price": 5
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 10,
+        "fields": {
+          "material": 4,
+          "town": 1,
+          "max_price": 4
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 11,
+        "fields": {
+          "material": 4,
+          "town": 2,
+          "max_price": 2
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 12,
+        "fields": {
+          "material": 4,
+          "town": 3,
+          "max_price": 5
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 13,
+        "fields": {
+          "material": 5,
+          "town": 1,
+          "max_price": 2
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 14,
+        "fields": {
+          "material": 5,
+          "town": 2,
+          "max_price": 5
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 15,
+        "fields": {
+          "material": 5,
+          "town": 3,
+          "max_price": 20
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 16,
+        "fields": {
+          "material": 6,
+          "town": 1,
+          "max_price": 4
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 17,
+        "fields": {
+          "material": 6,
+          "town": 2,
+          "max_price": 7
+        }
+      },
+      {
+        "model": "tradeapi.materialprice",
+        "pk": 18,
+        "fields": {
+          "material": 6,
+          "town": 3,
+          "max_price": 4
+        }
+      }
+]

@@ -1,0 +1,51 @@
+[
+    {
+        "model": "tradeapi.playerinventory",
+        "pk": 1,
+        "fields": {
+          "player": 1,
+          "material": 1,
+          "quantity": 5
+        }
+      },{
+        "model": "tradeapi.playerinventory",
+        "pk": 2,
+        "fields": {
+          "player": 2,
+          "material": 1,
+          "quantity": 5
+        }
+      },{
+        "model": "tradeapi.playerinventory",
+        "pk": 3,
+        "fields": {
+          "player": 3,
+          "material": 1,
+          "quantity": 5
+        }
+      },{
+        "model": "tradeapi.playerinventory",
+        "pk": 4,
+        "fields": {
+          "player": 4,
+          "material": 1,
+          "quantity": 5
+        }
+      },{
+        "model": "tradeapi.playerinventory",
+        "pk": 5,
+        "fields": {
+          "player": 5,
+          "material": 1,
+          "quantity": 5
+        }
+      },{
+        "model": "tradeapi.playerinventory",
+        "pk": 6,
+        "fields": {
+          "player": 6,
+          "material": 1,
+          "quantity": 5
+        }
+      }
+]

@@ -1,0 +1,44 @@
+[
+    {
+        "model": "tradeapi.material",
+        "pk": 1,
+        "fields": {
+          "name": "Wood"
+        }
+      },
+      {
+        "model": "tradeapi.material",
+        "pk": 2,
+        "fields": {
+          "name": "Iron"
+        }
+      },
+      {
+        "model": "tradeapi.material",
+        "pk": 3,
+        "fields": {
+          "name": "Fish"
+        }
+      },
+      {
+        "model": "tradeapi.material",
+        "pk": 4,
+        "fields": {
+          "name": "Wool"
+        }
+      },
+      {
+        "model": "tradeapi.material",
+        "pk": 5,
+        "fields": {
+          "name": "Swords"
+        }
+      },
+      {
+        "model": "tradeapi.material",
+        "pk": 6,
+        "fields": {
+          "name": "Wheat"
+        }
+      }
+]

@@ -1,0 +1,29 @@
+[
+        {
+          "model": "tradeapi.town",
+          "pk": 1,
+          "fields": {
+            "name": "Boatem",
+            "npc": "scar.png",
+            "npc_greeting": "Welcome to Boatem, traveler!"
+          }
+        },
+        {
+          "model": "tradeapi.town",
+          "pk": 2,
+          "fields": {
+            "name": "Goat Empire",
+            "npc": "doc.png",
+            "npc_greeting": "Salutations from the one true empire."
+          }
+        },
+        {
+          "model": "tradeapi.town",
+          "pk": 3,
+          "fields": {
+            "name": "Woodlands",
+            "npc": "gem.png",
+            "npc_greeting": "Greetings friend! The woods grant you hospitality."
+          }
+        }
+]
