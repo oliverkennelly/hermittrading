@@ -4,7 +4,7 @@
           "pk": 1,
           "fields": {
             "name": "Boatem",
-            "npc": "scar.png",
+            "npc": "npc_images/scar.png",
             "npc_greeting": "Welcome to Boatem, traveler!"
           }
         },
@@ -13,7 +13,7 @@
           "pk": 2,
           "fields": {
             "name": "Goat Empire",
-            "npc": "doc.png",
+            "npc": "npc_images/doc.png",
             "npc_greeting": "Salutations from the one true empire."
           }
         },
@@ -22,7 +22,7 @@
           "pk": 3,
           "fields": {
             "name": "Woodlands",
-            "npc": "gem.png",
+            "npc": "npc_images/gem.png",
             "npc_greeting": "Greetings friend! The woods grant you hospitality."
           }
         }
