@@ -10,6 +10,9 @@ class MaterialsSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class MaterialsViewSet(ViewSet):
+    queryset = Material.objects.all()
+    serializer_class = MaterialsSerializer
+
     def list(self, request):
         try:
             material = Material.objects.all()

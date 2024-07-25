@@ -10,6 +10,9 @@ class TownSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'npc', 'npcGreeting']
 
 class TownViewSet(ViewSet):
+    queryset = Town.objects.all()
+    serializer_class = TownSerializer
+    
     def retrieve(self, request, pk=None):
         try:
             town = Town.objects.get(pk=pk)

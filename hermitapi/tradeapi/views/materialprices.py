@@ -10,6 +10,9 @@ class MaterialPriceSerializer(serializers.ModelSerializer):
         fields = ['id', 'materialId', 'townId', 'maxPrice']
 
 class MaterialPriceViewSet(ViewSet):
+    queryset = MaterialPrice.objects.all()
+    serializer_class = MaterialPriceSerializer
+
     def list(self, request):
         try:
             prices = MaterialPrice.objects.all()

@@ -10,6 +10,9 @@ class PlayerStatusSerializer(serializers.ModelSerializer):
         fields = ['id', 'playerId', 'currentTown', 'day', 'money']
 
 class PlayerStatusViewSet(ViewSet):
+    queryset = PlayerStatus.objects.all()
+    serializer_class = PlayerStatusSerializer
+
     def create(self, request):
 
         player_stat = PlayerStatus()

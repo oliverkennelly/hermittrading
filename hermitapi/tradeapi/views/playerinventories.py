@@ -10,6 +10,9 @@ class PlayerInventorySerializer(serializers.ModelSerializer):
         fields = ['id', 'player', 'material', 'quantity']
 
 class PlayerInventoryViewSet(ViewSet):
+    queryset = PlayerInventory.objects.all()
+    serializer_class = PlayerInventorySerializer
+    
     def create(self, request):
 
         inventory = PlayerInventory()
