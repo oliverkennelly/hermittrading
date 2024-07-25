@@ -12,7 +12,7 @@ class PlayerInventorySerializer(serializers.ModelSerializer):
 class PlayerInventoryViewSet(ViewSet):
     queryset = PlayerInventory.objects.all()
     serializer_class = PlayerInventorySerializer
-    
+
     def create(self, request):
 
         inventory = PlayerInventory()
@@ -29,10 +29,10 @@ class PlayerInventoryViewSet(ViewSet):
     
     def list(self, request):
         try:
-            player = request.query_params.get('player_id')
+            player = request.auth.user
 
             if player:
-                inventory = PlayerInventory.objects.filter(playerId=player)
+                inventory = PlayerInventory.objects.filter(player=player)
             else:
                 return Response({"reason": ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)  
             
