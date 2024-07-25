@@ -7,7 +7,7 @@ from tradeapi.models import PlayerStatus, Town
 class PlayerStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlayerStatus
-        fields = ['id', 'playerId', 'currentTown', 'day', 'money']
+        fields = ['id', 'player', 'current_town', 'day', 'money']
 
 class PlayerStatusViewSet(ViewSet):
     queryset = PlayerStatus.objects.all()
@@ -47,6 +47,7 @@ class PlayerStatusViewSet(ViewSet):
             player_stat.current_town =Town.objects.get(pk=request.data["town_id"])
             player_stat.day = request.data["day"]
             player_stat.money = request.data["money"]
+            player_stat.save()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
             
         except PlayerStatus.DoesNotExist as ex:
@@ -58,7 +59,7 @@ class PlayerStatusViewSet(ViewSet):
     def retrieve(self, request, pk=None):
         try:
             player_stat = PlayerStatus.objects.get(pk=pk)
-            serializer = PlayerStatusSerializer([player_stat])
+            serializer = PlayerStatusSerializer(player_stat)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as ex:
             return Response({"reason": ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)

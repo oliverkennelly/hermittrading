@@ -7,7 +7,7 @@ from tradeapi.models import MaterialPrice
 class MaterialPriceSerializer(serializers.ModelSerializer):
     class Meta:
         model = MaterialPrice
-        fields = ['id', 'materialId', 'townId', 'maxPrice']
+        fields = ['id', 'material', 'town', 'max_price']
 
 class MaterialPriceViewSet(ViewSet):
     queryset = MaterialPrice.objects.all()
@@ -15,7 +15,8 @@ class MaterialPriceViewSet(ViewSet):
 
     def list(self, request):
         try:
-            prices = MaterialPrice.objects.all()
+            town = request.query_params.get('town_id')
+            prices = MaterialPrice.objects.filter(town=town)
             serializer = MaterialPriceSerializer(prices, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as ex:
