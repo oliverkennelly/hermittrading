@@ -1,10 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { getPlayerStatusByToken } from "../services/playerStatService"
 
 export const Map = ({authToken}) => {
   const navigate = useNavigate()
   const playerName = "player"
-  const playerStatus = useState({})
+  const [playerStatus, setPlayerStatus] = useState({})
+
+  const fetchPlayerStatus = () => {
+    getPlayerStatusByToken(authToken).then(data => {
+      setPlayerStatus(data)
+    })
+  }
+
+  useEffect(() => {
+    fetchPlayerStatus
+  }, [authToken])
 
   return (
     <main className='text-slate-900 pl-10 pr-10'>

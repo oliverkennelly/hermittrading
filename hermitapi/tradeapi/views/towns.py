@@ -3,11 +3,7 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from tradeapi.models import Town
-
-class TownSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Town
-        fields = ['id', 'name', 'npc', 'npc_greeting']
+from .serializers import TownSerializer
 
 class TownViewSet(ViewSet):
     queryset = Town.objects.all()

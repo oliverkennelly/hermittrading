@@ -4,11 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from tradeapi.models import PlayerStatus, Town
-
-class PlayerStatusSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PlayerStatus
-        fields = ['id', 'player', 'current_town', 'day', 'money']
+from .serializers import PlayerStatusSerializer
 
 class PlayerStatusViewSet(ViewSet):
     queryset = PlayerStatus.objects.all()

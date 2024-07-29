@@ -3,11 +3,7 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from tradeapi.models import PlayerInventory, Material
-
-class PlayerInventorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PlayerInventory
-        fields = ['id', 'player', 'material', 'quantity']
+from .serializers import PlayerInventorySerializer
 
 class PlayerInventoryViewSet(ViewSet):
     queryset = PlayerInventory.objects.all()

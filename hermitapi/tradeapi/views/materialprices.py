@@ -3,11 +3,7 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from tradeapi.models import MaterialPrice
-
-class MaterialPriceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MaterialPrice
-        fields = ['id', 'material', 'town', 'max_price']
+from .serializers import MaterialPriceSerializer
 
 class MaterialPriceViewSet(ViewSet):
     queryset = MaterialPrice.objects.all()
