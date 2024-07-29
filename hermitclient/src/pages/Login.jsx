@@ -21,7 +21,7 @@ export const Login = () => {
             .then(authInfo => {
                 if (authInfo.token) {
                     localStorage.setItem("game_token", JSON.stringify(authInfo.token))
-                    navigate("/")
+                    navigate("/instructions")
                 } else {
                     existDialog.current.showModal()
                 }

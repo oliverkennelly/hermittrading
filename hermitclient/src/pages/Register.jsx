@@ -28,7 +28,7 @@ export const Register = () => {
             .then(authInfo => {
                 if (authInfo && authInfo.token) {
                     localStorage.setItem("rock_token", JSON.stringify(authInfo))
-                    navigate("/")
+                    navigate("/instructions")
                 } else {
                     existDialog.current.showModal()
                 }
