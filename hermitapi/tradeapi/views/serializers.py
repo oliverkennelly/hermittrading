@@ -8,16 +8,18 @@ class MaterialSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class PlayerInventorySerializer(serializers.ModelSerializer):
-    material = MaterialSerializer(read_only=True)
+    material_name = serializers.CharField(source='material.name', read_only=True)
 
     class Meta:
         model = PlayerInventory
-        fields = ['id', 'player', 'material', 'quantity']
+        fields = ['id', 'player', 'material', 'material_name', 'quantity']
 
 class MaterialPriceSerializer(serializers.ModelSerializer):
+    material_name = serializers.CharField(source='material.name', read_only=True)
+
     class Meta:
         model = MaterialPrice
-        fields = ['id', 'material', 'town', 'max_price']
+        fields = ['id', 'material', 'material_name', 'town', 'max_price']
 
 class PlayerStatusSerializer(serializers.ModelSerializer):
     class Meta:
