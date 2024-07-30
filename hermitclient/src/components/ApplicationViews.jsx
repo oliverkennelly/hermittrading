@@ -2,9 +2,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Authorized } from "./Authorized"
 import { Login } from "../pages/Login.jsx"
 import { Register } from '../pages/Register.jsx'
-import { Instructions } from "./Instructions.jsx"
-import { Shop } from "./Shop.jsx"
-import { EndResult } from "./EndResult.jsx"
+import { Instructions } from "../pages/Instructions.jsx"
+import { Shop } from "../pages/Shop.jsx"
+import { EndResult } from "../pages/EndResult.jsx"
 import { HermitMap } from "../pages/Map.jsx"
 
 
