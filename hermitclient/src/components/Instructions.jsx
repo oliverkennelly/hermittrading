@@ -12,7 +12,7 @@ export const Instructions = () => {
             After all these expenses, you have only 50 gold left.
         </p>
         <p>
-            Travel the world of hermitcraft and buy and sell goods! Different locations have different
+            Travel the world of Hermitcraft and buy and sell goods! Different locations have different
             prices for their wares, and they'll buy your goods at different prices depending on the demands
             of the region. Traveling to each city takes a day of your time, so choose carefully!
         </p>

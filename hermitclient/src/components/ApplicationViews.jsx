@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Authorized } from "./Authorized"
 import { Login } from "../pages/Login.jsx"
-import Map from "../pages/Map"
 import { Register } from '../pages/Register.jsx'
 import { Instructions } from "./Instructions.jsx"
 import { Shop } from "./Shop.jsx"
 import { EndResult } from "./EndResult.jsx"
+import { HermitMap } from "../pages/Map.jsx"
 
 
 export const ApplicationViews = () => {
@@ -17,7 +17,7 @@ export const ApplicationViews = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route element={<Authorized />}>
-                <Route path="/" element={<Map />} />
+                <Route path="/" element={<HermitMap />} />
                 <Route path="/instructions" element={<Instructions authToken={authToken}/>} />
                 <Route path="/shop">
                     <Route path=":cityId" element={<Shop authToken={authToken}/>}/>
