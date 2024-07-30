@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import ImageMapper from 'react-image-mapper';
+import ImageMapper from 'react-img-mapper';
 import { Inventory } from '../components/Inventory';
 import { useNavigate } from 'react-router-dom';
-import { playerTravel } from '../services/playerStatService';
+import { getPlayerStatusByToken, playerTravel } from '../services/playerStatService';
+
 
 export const HermitMap = ({ authToken }) => {
     const navigate = useNavigate()
@@ -20,7 +21,7 @@ export const HermitMap = ({ authToken }) => {
     const fetchPlayerStatus = () => {
         getPlayerStatusByToken(authToken).then(data => {
         setPlayerStatus(data)
-        setCurrentTown(playerStatus.current_town)
+        setCurrentTown(data.current_town)
         })
     }
 
@@ -55,11 +56,11 @@ export const HermitMap = ({ authToken }) => {
     return (
         <div className="container mx-auto px-4">
             <div>
-                <Inventory playerStatus={playerStatus}/>
+                <Inventory authToken={authToken} playerStatus={playerStatus}/>
             </div>
             <div className="relative">
             <ImageMapper
-                src="../images/hermitmap.jpeg"
+                src="/images/hermitmap.jpeg"
                 map={MAP}
                 onClick={handleClick}
                 onMouseEnter={(area) => setHoveredTown(area.id)}

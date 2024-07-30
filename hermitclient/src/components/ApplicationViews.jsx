@@ -17,7 +17,7 @@ export const ApplicationViews = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route element={<Authorized />}>
-                <Route path="/" element={<HermitMap />} />
+                <Route path="/" element={<HermitMap authToken={authToken}/>} />
                 <Route path="/instructions" element={<Instructions authToken={authToken}/>} />
                 <Route path="/shop">
                     <Route path=":cityId" element={<Shop authToken={authToken}/>}/>
