@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ImageMapper from 'react-image-mapper';
 import { Inventory } from '../components/Inventory';
+import { useNavigate } from 'react-router-dom';
+import { playerTravel } from '../services/playerStatService';
 
 export const HermitMap = ({ authToken }) => {
+    const navigate = useNavigate()
     const [playerStatus, setPlayerStatus] = useState({})
     const [showModal, setShowModal] = useState(false);
     const [selectedTown, setSelectedTown] = useState(null);
@@ -38,8 +41,8 @@ export const HermitMap = ({ authToken }) => {
     }
 
     const handleTravel = () => {
-        //navigate to town's shop
-        onTravel(selectedTown)
+        playerTravel(authToken, playerStatus, selectedTown)
+        navigate(`/shop`, {state: {selectedTown}})
         setShowModal(false)
     }
 
@@ -77,7 +80,7 @@ export const HermitMap = ({ authToken }) => {
             {showModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                 <div className="bg-white p-4 rounded">
-                    <h2 className="text-xl font-bold mb-4">Travel to {selectedTown}?</h2>
+                    <h2 className="text-xl font-bold mb-4">Travel to {getTownById(selectedTown).name}?</h2>
                     <div className="flex justify-end space-x-2">
                     <button 
                         onClick={handleTravel}
