@@ -33,17 +33,15 @@ export const HermitMap = ({ authToken }) => {
     };
 
     const handleTownClick = useCallback((townId) => {
-        console.log("Town clicked:", townId)
         setSelectedTown(townId)
         setShowModal(prev => {
-            console.log("Setting showModal to:", !prev)
             return true
         })
     }, [setShowModal])
 
     const handleTravel = useCallback(() => {
         playerTravel(authToken, playerStatus, selectedTown)
-        navigate(`/shop`, {state: {selectedTown}})
+        navigate(`/shop/${selectedTown}`)
         setShowModal(false)
     }, [authToken, playerStatus, selectedTown, navigate])
 
@@ -72,13 +70,6 @@ export const HermitMap = ({ authToken }) => {
             navigate(`/end`, {state: {winConditionMet}})
         }
     }, [playerStatus, navigate])
-
-    useEffect(() => {
-        console.log("showModal changed:", showModal)
-        if (showModal) {
-            console.log("Selected town:", selectedTown)
-        }
-    }, [showModal, selectedTown])
 
     return (
         <div className="container mx-auto px-4">

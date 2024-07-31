@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react"
 import { Input } from "../form-elements"
 import Modal from "../modal"
+import { updatePlayerInventoryById } from "../services/playerInventoryService"
 
-export default function TradeModal ({ showModal, setShowModal, materialPriceReply, currentMoney }) {
-    //note: needs to have different title and name for cost/profit.
+export default function TradeModal ({ authToken, showModal, setShowModal, materialPriceReply, currentMoney, buying}) {
   const [materialQuantity, setMaterialQuanity] = useState(0)
   const [cost, setCost] = useState(0)
+  const [updatedInv, setUpdatedInv] = useState({})
   let maxQuanity = Math.floor(currentMoney / materialPriceReply.max_price)
-  let titleMessage = `How much ${materialPriceReply.material} to ${buying ? "purchase" : "sell"}?`
+  let titleMessage = `How much ${materialPriceReply.material_name} to ${buying ? "purchase" : "sell"}?`
 
   const handleTransaction = () => {
-
+    updatePlayerInventoryById(authToken, /* put the id of the inventory item here*/ updatedInv)
+    setShowModal(false)
   }
 
   useEffect(() => {
     setCost(materialQuantity*materialPriceReply.max_price)
+    setUpdatedInv({
+        "material_id": materialPriceReply.material,
+        "quantity": materialQuantity
+    })
   }, [materialQuantity])
 
   return (
@@ -30,7 +36,7 @@ export default function TradeModal ({ showModal, setShowModal, materialPriceRepl
         />
       </>
       <p>Current Money: {currentMoney} gold</p>
-      <p>Cost: {cost} gold</p>
+      <p>{buying ? "Cost" : "Profit"}: {cost} gold</p>
       <>
         <button
           className="button is-success"
@@ -39,6 +45,5 @@ export default function TradeModal ({ showModal, setShowModal, materialPriceRepl
         <button className="button" onClick={() => setShowModal(false)}>Cancel</button>
       </>
     </Modal>
-    //need to create PUT/POST request
   )
 }

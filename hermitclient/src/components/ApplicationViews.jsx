@@ -20,7 +20,7 @@ export const ApplicationViews = () => {
                 <Route path="/" element={<HermitMap authToken={authToken}/>} />
                 <Route path="/instructions" element={<Instructions authToken={authToken}/>} />
                 <Route path="/shop">
-                    <Route path=":cityId" element={<Shop authToken={authToken}/>}/>
+                    <Route path=":townId" element={<Shop authToken={authToken}/>}/>
                 </Route>
                 <Route path="/end" element={<EndResult authToken={authToken}/>} />
             </Route>
