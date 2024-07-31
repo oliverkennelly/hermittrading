@@ -19,7 +19,7 @@ class MaterialPriceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MaterialPrice
-        fields = ['id', 'material', 'material_name', 'town', 'max_price']
+        fields = ['id', 'material', 'material_name', 'town', 'max_price', 'sold']
 
 class PlayerStatusSerializer(serializers.ModelSerializer):
     class Meta:
