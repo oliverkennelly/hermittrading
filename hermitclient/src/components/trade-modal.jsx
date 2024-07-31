@@ -2,14 +2,21 @@ import { useEffect, useState } from "react"
 import { Input } from "../form-elements"
 import Modal from "../modal"
 import { updatePlayerInventoryById } from "../services/playerInventoryService"
+import { getShopMaterialPriceById } from "../services/shopService"
 
-export default function TradeModal ({ authToken, showModal, setShowModal, materialPriceReply, currentMoney, buying}) {
+export default function TradeModal ({ authToken, showModal, setShowModal, currentMoney, buying, materialPriceId}) {
   const [materialQuantity, setMaterialQuanity] = useState(0)
   const [cost, setCost] = useState(0)
   const [updatedInv, setUpdatedInv] = useState({})
+  const [materialPriceReply, setMaterialPriceReply] = useState({})
   let maxQuanity = Math.floor(currentMoney / materialPriceReply.max_price)
   let titleMessage = `How much ${materialPriceReply.material_name} to ${buying ? "purchase" : "sell"}?`
 
+  const fetchMaterialPrice = () => {
+    getShopMaterialPriceById(materialPriceId, authToken).then(data => {
+        setMaterialPriceReply(data)
+    })
+  }
   const handleTransaction = () => {
     updatePlayerInventoryById(authToken, /* put the id of the inventory item here*/ updatedInv)
     setShowModal(false)
@@ -22,6 +29,10 @@ export default function TradeModal ({ authToken, showModal, setShowModal, materi
         "quantity": materialQuantity
     })
   }, [materialQuantity])
+
+  useEffect(() => {
+    fetchMaterialPrice()
+  })
 
   return (
     <Modal showModal={showModal} setShowModal={setShowModal} title={titleMessage}>

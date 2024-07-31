@@ -13,3 +13,11 @@ export const getShopMaterialPriceByTownId = (id, authToken) => {
         }
     }).then((res) => res.json())
 }
+
+export const getShopMaterialPriceById = (id, authToken) => {
+    return fetch(`http://localhost:8000/materialprices/${id}`, {
+        headers: {
+            "Authorization": authToken
+        }
+    }).then((res) => res.json())
+}
