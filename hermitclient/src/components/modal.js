@@ -11,7 +11,6 @@ export default function Modal({ showModal, setShowModal, title, children }) {
           <section className="modal-card-body">
             {body}
           </section>
-  
           <footer className="modal-card-foot">
             {footer}
           </footer>
