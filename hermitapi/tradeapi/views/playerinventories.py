@@ -1,5 +1,6 @@
 from django.http import HttpResponseServerError
 from rest_framework import serializers, status
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from tradeapi.models import PlayerInventory, Material
@@ -57,6 +58,20 @@ class PlayerInventoryViewSet(ViewSet):
             inventory.material =Material.objects.get(pk=request.data["material_id"])
             inventory.quantity = request.data["quantity"]
             inventory.save()
+            return Response(None, status=status.HTTP_204_NO_CONTENT)
+            
+        except PlayerInventory.DoesNotExist as ex:
+            return Response({'reason': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as ex:
+            return Response({'reason': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    @action(detail=False, methods=['delete'])
+    def reset(self, request):
+        try:
+            player = request.auth.user
+            inventory = PlayerInventory.objects.filter(player=player)
+            inventory.delete()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
             
         except PlayerInventory.DoesNotExist as ex:
