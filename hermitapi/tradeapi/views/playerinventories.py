@@ -79,3 +79,17 @@ class PlayerInventoryViewSet(ViewSet):
 
         except Exception as ex:
             return Response({'reason': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    @action(detail=False, methods=['post'])
+    def new(self, request):
+        inventory = PlayerInventory()
+        inventory.player = request.auth.user
+        inventory.material =Material.objects.get(pk=1)
+        inventory.quantity = 10
+
+        try:
+            inventory.save()
+            serializer = PlayerInventorySerializer(inventory)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception as ex:
+            return Response({"reason": ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)

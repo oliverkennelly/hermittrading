@@ -6,6 +6,17 @@ export const getPlayerInventoryByToken = (authToken) => {
     }).then((res) => res.json())
 }
 
+export const createPlayerInventoryItem = (authToken, body) => {
+    return fetch(`http://localhost:8000/playerinventory`, {
+        method: "POST",
+        headers: {
+            "Authorization": authToken,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body),
+    })
+}
+
 export const updatePlayerInventoryById = ( authToken, id, invBody) => {
     return fetch(`http://localhost:8000/playerinventory/${id}`, {
         method: "PUT",
@@ -27,6 +38,19 @@ export const deletePlayerInventoryItemById = ( authToken, id) => {
 }
 
 export const restartPlayerInventory = (authToken) => {
-    //two fetch calls, one that wipes inventory, make api side support for that
-    // second call will POST with basic items
+    return fetch(`http://localhost:8000/playerinventory/reset`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": authToken
+        },
+    })
+}
+
+export const newPlayerInventory = (authToken) => {
+    return fetch(`http://localhost:8000/playerinventory/new`, {
+        method: "POST",
+        headers: {
+            "Authorization": authToken,
+        }
+    })
 }

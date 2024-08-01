@@ -35,3 +35,29 @@ export const restartPlayerStatus = (authToken) => {
         body: JSON.stringify(starterStatus),
     })
 }
+
+export const playerPurchase = (authToken, playerStatus, cost) => {
+    const editedStatus = {...playerStatus}
+    editedStatus.money = playerStatus.money - cost
+    return fetch(`http://localhost:8000/playerstatus/update_status`, {
+        method: "PUT",
+        headers: {
+            "Authorization": authToken,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(editedStatus),
+    })
+}
+
+export const playerSell = (authToken, playerStatus, profit) => {
+    const editedStatus = {...playerStatus}
+    editedStatus.money = playerStatus.money + profit
+    return fetch(`http://localhost:8000/playerstatus/update_status`, {
+        method: "PUT",
+        headers: {
+            "Authorization": authToken,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(editedStatus),
+    })
+}

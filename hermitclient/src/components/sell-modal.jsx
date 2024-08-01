@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { deletePlayerInventoryItemById, updatePlayerInventoryById } from "../services/playerInventoryService"
 import { Input } from "./form-elements/input"
+import { playerSell } from "../services/playerStatService"
 
-export default function SellModal ({ authToken, setShowModal, currentMoney, materialPriceInfo, playerInventoryItem, fetchPlayerInventory}) {
+export default function SellModal ({ authToken, setShowModal, playerStatus, materialPriceInfo, playerInventoryItem, fetchPlayerInventory}) {
   const [materialQuantity, setMaterialQuantity] = useState(0)
   const [cost, setCost] = useState(0)
   const [updatedInv, setUpdatedInv] = useState({})
@@ -18,6 +19,7 @@ export default function SellModal ({ authToken, setShowModal, currentMoney, mate
     } else {
         updatePlayerInventoryById(authToken, updatedInv.material_id, updatedInv)
     }
+    playerSell(authToken, playerStatus, cost)
     setShowModal(false)
     fetchPlayerInventory()
   }
@@ -40,7 +42,7 @@ export default function SellModal ({ authToken, setShowModal, currentMoney, mate
           max={playerInventoryItem?.quantity}
           onChange={handleQuantityChange}
         />
-      <p>Current Money: {currentMoney} gold</p>
+      <p>Current Money: {playerStatus.money} gold</p>
       <p>Profit: {cost} gold</p>
         <button
           onClick={handleTransaction}
