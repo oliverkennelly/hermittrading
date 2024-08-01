@@ -15,6 +15,9 @@ export const NavBar = () => {
                 <NavLink className="text-left underline text-blue-600 hover:text-purple-700" to={"/restart"}>Restart</NavLink>
             </li>
             <li className="navbar__item">
+                <NavLink className="text-left underline text-blue-600 hover:text-purple-700" to={"/profile"}>Profile</NavLink>
+            </li>
+            <li className="navbar__item">
                 <button className="underline text-blue-600 hover:text-purple-700"
                     onClick={() => {
                         localStorage.removeItem("game_token")
