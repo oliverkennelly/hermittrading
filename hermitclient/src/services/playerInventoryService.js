@@ -17,6 +17,12 @@ export const updatePlayerInventoryById = ( authToken, id, invBody) => {
     }).then((res) => res.json())
 }
 
+export const deletePlayerInventoryItemById = ( authToken, id) => {
+    return fetch(`http://localhost:8088/playerinventory/${id}`, {
+        method: "DELETE"
+    })
+}
+
 export const restartPlayerInventory = (authToken) => {
     //two fetch calls, one that wipes inventory, make api side support for that
     // second call will POST with basic items
