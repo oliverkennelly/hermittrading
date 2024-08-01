@@ -5,7 +5,7 @@ export const EndResult = () => {
     const {win} = useParams()
 
     const handleButtonClick = () => {
-        navigate(`/reset`)
+        navigate(`/restart`)
     }
 
     return (<main>
