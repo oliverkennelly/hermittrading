@@ -9,6 +9,7 @@ router.register(r'materials', MaterialsViewSet)
 router.register(r'materialprices', MaterialPriceViewSet)
 router.register(r'playerstatus', PlayerStatusViewSet)
 router.register(r'playerinventory', PlayerInventoryViewSet)
+router.register(r'users', UserViewSet, basename='user')
 
 urlpatterns = [
     path('', include(router.urls)),

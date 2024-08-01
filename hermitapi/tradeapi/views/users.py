@@ -3,7 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-
+from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
@@ -14,6 +14,10 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'password']
         extra_kwargs = {'password': {'write_only': True}}
 
+class UserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']
 
 class UserViewSet(viewsets.ViewSet):
     queryset = User.objects.all()
@@ -43,3 +47,25 @@ class UserViewSet(viewsets.ViewSet):
             return Response({'token': token.key}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+        
+    @action(detail=False, methods=['get'], url_path='me', authentication_classes=[TokenAuthentication], permission_classes=[permissions.IsAuthenticated])
+    def get_user_info(self, request):
+        user = request.user
+        return Response({'username': user.username}, status=status.HTTP_200_OK)
+    
+    @action(detail=False, methods=['put'], url_path='update-username', 
+            authentication_classes=[TokenAuthentication], 
+            permission_classes=[permissions.IsAuthenticated])
+    def update_username(self, request):
+        user = request.user
+        serializer = UserUpdateSerializer(user, data=request.data, partial=True)
+        
+        if serializer.is_valid():
+            new_username = serializer.validated_data.get('username')
+            if new_username and User.objects.filter(username=new_username).exclude(id=user.id).exists():
+                return Response({'error': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            serializer.save()
+            return Response({'message': 'Username updated successfully'}, status=status.HTTP_200_OK)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

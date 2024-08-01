@@ -20,6 +20,15 @@ export const playerTravel = (authToken, playerStatus, selectedTown) => {
     })
 }
 
+export const newPlayerStatus = (authToken) => {
+    return fetch(`http://localhost:8000/playerstatus`, {
+        method: "POST",
+        headers: {
+            "Authorization": authToken,
+        },
+    })
+}
+
 export const restartPlayerStatus = (authToken) => {
     const starterStatus = {
         "current_town": 1,

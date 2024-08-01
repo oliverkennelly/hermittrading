@@ -1,3 +1,0 @@
-export const RestartModal = () => {
-    return
-}
