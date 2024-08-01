@@ -33,11 +33,15 @@ export const HermitMap = ({ authToken }) => {
     };
 
     const handleTownClick = useCallback((townId) => {
-        setSelectedTown(townId)
-        setShowModal(prev => {
-            return true
-        })
-    }, [setShowModal])
+        if (townId === currentTown) {
+            navigate(`/shop/${townId}`)
+        } else {
+            setSelectedTown(townId)
+            setShowModal(prev => {
+                return true
+            })
+        }
+    }, [currentTown, setShowModal])
 
     const handleTravel = useCallback(() => {
         playerTravel(authToken, playerStatus, selectedTown)
