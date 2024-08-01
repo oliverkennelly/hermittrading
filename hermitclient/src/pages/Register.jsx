@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Login.css"
 
 export const Register = () => {
-    const [email, setEmail] = useState("admina@straytor.com")
+    const [username, setUsername] = useState("admina@straytor.com")
     const [password, setPassword] = useState("straytor")
     const [firstName, setFirstName] = useState("Admina")
     const [lastName, setLastName] = useState("Straytor")
@@ -27,7 +27,7 @@ export const Register = () => {
             .then(res => res.json())
             .then(authInfo => {
                 if (authInfo && authInfo.token) {
-                    localStorage.setItem("rock_token", JSON.stringify(authInfo))
+                    localStorage.setItem("game_token", JSON.stringify(authInfo))
                     navigate("/instructions")
                 } else {
                     existDialog.current.showModal()
@@ -44,7 +44,7 @@ export const Register = () => {
 
             <section>
                 <form className="form--login" onSubmit={handleRegister}>
-                    <h1 className="text-4xl mt-7 mb-3">Gamer Rater</h1>
+                    <h1 className="text-4xl mt-7 mb-3">Hermit Trading</h1>
                     <h2 className="text-xl mb-10">Register new account</h2>
                     <fieldset className="mb-4">
                         <label htmlFor="firstName"> First name </label>
@@ -67,8 +67,8 @@ export const Register = () => {
                     <fieldset className="mb-4">
                         <label htmlFor="inputEmail"> Email address </label>
                         <input type="email" id="inputEmail"
-                            value={email}
-                            onChange={evt => setEmail(evt.target.value)}
+                            value={username}
+                            onChange={evt => setUsername(evt.target.value)}
                             className="form-control"
                             placeholder="Email address"
                             required autoFocus />

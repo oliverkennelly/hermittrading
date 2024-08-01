@@ -26,7 +26,9 @@ export const ApplicationViews = () => {
                 <Route path="/shop">
                     <Route path=":townId" element={<Shop authToken={authToken}/>}/>
                 </Route>
-                <Route path="/end" element={<EndResult authToken={authToken}/>} />
+                <Route path="/end">
+                <Route path=":win" element={<EndResult authToken={authToken}/>}/>
+                </Route>
             </Route>
         </Routes>
     </BrowserRouter>

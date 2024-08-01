@@ -6,25 +6,20 @@ import { useNavigate } from "react-router-dom"
 export const Profile = ({authToken}) => {
     const navigate = useNavigate()
     const [username, setUsername] = useState("")
-    const [error, setError] = useState("")
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
 
     const fetchUsername = () => {
         getPlayerUsername(authToken).then(data => {
-            setUsername(data)
+            setUsername(data.username)
+            setFirstName(data.first_name)
+            setLastName(data.last_name)
         })
     }
 
-    const handleConfirm = async () => {
-        try {
-            await editPlayerUsername(authToken, username)
-            navigate(`/`)
-        } catch (err) {
-            if (err.response && err.response.status === 400) {
-                setError("This username is already taken. Please choose another.")
-            } else {
-                setError("An error occurred. Please try again.")
-            }
-        }
+    const handleConfirm = () => {
+        editPlayerUsername(authToken, {"username": username, "first_name": firstName, "last_name": lastName})
+        navigate(`/`)
     }
 
     const handleCancel = () => {
@@ -39,13 +34,25 @@ export const Profile = ({authToken}) => {
         <h1>Profile Settings</h1>
         <Input
             type="text"
-            label="Username"
+            label="Email"
             value={username}
             onChange={(e) => {
-                setUsername(e.target.value) 
-                setError("")}}
+                setUsername(e.target.value) }}
         />
-        {error && <p style={{color: 'red'}}>{error}</p>}
+        <Input
+            type="text"
+            label="First Name"
+            value={firstName}
+            onChange={(e) => {
+                setFirstName(e.target.value) }}
+        />
+        <Input
+            type="text"
+            label="Last Name"
+            value={lastName}
+            onChange={(e) => {
+                setLastName(e.target.value) }}
+        />
         <button onClick={handleCancel}>Cancel</button>
         <button onClick={handleConfirm}>Confirm</button>
     </div>

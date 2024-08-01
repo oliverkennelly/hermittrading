@@ -7,7 +7,7 @@ export const getPlayerUsername = (authToken ) => {
 }
 
 export const editPlayerUsername = (authToken, body) => {
-    return fetch(`http://localhost:8000/users/update-username`, {
+    return fetch(`http://localhost:8000/users/update`, {
         method: "PUT",
         headers: {
             "Authorization": authToken,

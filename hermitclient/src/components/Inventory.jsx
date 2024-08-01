@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
-import { getPlayerStatusByToken } from "../services/playerStatService"
 import { getPlayerInventoryByToken } from "../services/playerInventoryService"
+import { getPlayerUsername } from "../services/userService"
 
 export const Inventory = ({authToken, playerStatus}) => {
   const [playerIn, setPlayerIn] = useState([])
+  const [playerName, setPlayerName] = useState("")
 
   const fetchPlayerInventory = () => {
     getPlayerInventoryByToken(authToken).then(data => {
@@ -11,13 +12,20 @@ export const Inventory = ({authToken, playerStatus}) => {
     })
   }
 
+  const fetchUsername = () => {
+    getPlayerUsername(authToken).then(data => {
+      setPlayerName(data.first_name)
+    })
+  }
+
   useEffect(() => {
     fetchPlayerInventory()
+    fetchUsername()
   }, [authToken])
 
   return (
     <main className="background">
-      <h2>Inventory</h2>
+      <h2>{playerName}'s inventory</h2>
       {playerIn.map((item) => (
         <div>
           {item.material_name}: {item.quantity}

@@ -17,7 +17,7 @@ export default function SellModal ({ authToken, setShowModal, playerStatus, mate
     if (playerInventoryItem?.quantity === materialQuantity) {
         deletePlayerInventoryItemById(authToken, playerInventoryItem?.id)
     } else {
-        updatePlayerInventoryById(authToken, updatedInv.material_id, updatedInv)
+        updatePlayerInventoryById(authToken, playerInventoryItem?.id, updatedInv)
     }
     playerSell(authToken, playerStatus, cost)
     setShowModal(false)

@@ -70,8 +70,11 @@ export const HermitMap = ({ authToken }) => {
 
     useEffect(() => {
         if (playerStatus.day >= 7) {
-            let winConditionMet = playerStatus.money >= 150
-            navigate(`/end`, {state: {winConditionMet}})
+            let winConditionMet = false
+            if (playerStatus.money >= 150){
+                winConditionMet = true
+            }
+            navigate(`/end/${winConditionMet}`)
         }
     }, [playerStatus, navigate])
 

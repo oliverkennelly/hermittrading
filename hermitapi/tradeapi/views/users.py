@@ -11,17 +11,18 @@ from django.contrib.auth import authenticate
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'password']
+        fields = ['id', 'username', 'password', 'first_name', 'last_name']
         extra_kwargs = {'password': {'write_only': True}}
 
 class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username']
+        fields = ['username', 'first_name', 'last_name']
 
 class UserViewSet(viewsets.ViewSet):
     queryset = User.objects.all()
     permission_classes = [permissions.AllowAny]
+    authentication_classes = [TokenAuthentication]
 
     @action(detail=False, methods=['post'], url_path='register')
     def register_account(self, request):
@@ -29,7 +30,9 @@ class UserViewSet(viewsets.ViewSet):
         if serializer.is_valid():
             user = User.objects.create_user(
                 username=serializer.validated_data['username'],
-                password=serializer.validated_data['password']
+                password=serializer.validated_data['password'],
+                first_name=serializer.validated_data['first_name'],
+                last_name=serializer.validated_data['last_name']
             )
             token, created = Token.objects.get_or_create(user=user)
             return Response({"token": token.key}, status=status.HTTP_201_CREATED)
@@ -47,25 +50,18 @@ class UserViewSet(viewsets.ViewSet):
             return Response({'token': token.key}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
-        
-    @action(detail=False, methods=['get'], url_path='me', authentication_classes=[TokenAuthentication], permission_classes=[permissions.IsAuthenticated])
-    def get_user_info(self, request):
-        user = request.user
-        return Response({'username': user.username}, status=status.HTTP_200_OK)
     
-    @action(detail=False, methods=['put'], url_path='update-username', 
-            authentication_classes=[TokenAuthentication], 
-            permission_classes=[permissions.IsAuthenticated])
-    def update_username(self, request):
+    @action(detail=False, methods=['put'], url_path='update', permission_classes=[permissions.IsAuthenticated])
+    def update_user(self, request):
         user = request.user
         serializer = UserUpdateSerializer(user, data=request.data, partial=True)
-        
         if serializer.is_valid():
-            new_username = serializer.validated_data.get('username')
-            if new_username and User.objects.filter(username=new_username).exclude(id=user.id).exists():
-                return Response({'error': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
-            
             serializer.save()
-            return Response({'message': 'Username updated successfully'}, status=status.HTTP_200_OK)
-        
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['get'], url_path='me', permission_classes=[permissions.IsAuthenticated])
+    def get_user_details(self, request):
+        user = request.user
+        serializer = UserUpdateSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
