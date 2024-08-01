@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { updatePlayerInventoryById } from "../services/playerInventoryService"
 import { Input } from "./form-elements/input"
 
-export default function BuyModal ({ authToken, showModal, setShowModal, currentMoney, materialPriceInfo}) {
+export default function BuyModal ({ authToken, setShowModal, currentMoney, materialPriceInfo, playerInventoryItem, fetchPlayerInventory}) {
   const [materialQuantity, setMaterialQuantity] = useState(0)
   const [cost, setCost] = useState(0)
   const [updatedInv, setUpdatedInv] = useState({})
@@ -10,8 +10,9 @@ export default function BuyModal ({ authToken, showModal, setShowModal, currentM
   let maxQuantity = Math.floor(currentMoney / materialPriceInfo?.max_price)
 
   const handleTransaction = () => {
-    updatePlayerInventoryById(authToken, updatedInv.material, updatedInv)
+    updatePlayerInventoryById(authToken, updatedInv.material_id, updatedInv)
     setShowModal(false)
+    fetchPlayerInventory()
   }
 
   const handleQuantityChange = (e) => {
@@ -23,7 +24,7 @@ export default function BuyModal ({ authToken, showModal, setShowModal, currentM
     setCost(materialQuantity*materialPriceInfo?.max_price)
     setUpdatedInv({
         "material_id": materialPriceInfo?.material,
-        "quantity": materialQuantity
+        "quantity": materialQuantity + (playerInventoryItem ? playerInventoryItem?.quantity : 0)
     })
   }, [materialQuantity, materialPriceInfo])
 

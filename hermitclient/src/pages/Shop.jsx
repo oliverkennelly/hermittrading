@@ -57,8 +57,8 @@ export const Shop = ({authToken}) => {
     }
 
     return (<>
-    {showBuyModal ? <BuyModal authToken={authToken} showModal={showBuyModal} setShowModal={setShowBuyModal} currentMoney={playerStatus.money} materialPriceInfo={shopPrices.find(item => item.material === selectedMaterialId)}/> : <></>}
-    {showSellModal ? <SellModal authToken={authToken} showModal={showSellModal} setShowModal={setShowSellModal} currentMoney={playerStatus.money} materialPriceInfo={shopPrices.find(item => item.material === selectedMaterialId)} playerInventoryItem={playerIn.find(item => item.material === selectedMaterialId)}/> : <></>}
+    {showBuyModal ? <BuyModal authToken={authToken} showModal={showBuyModal} setShowModal={setShowBuyModal} currentMoney={playerStatus.money} materialPriceInfo={shopPrices.find(item => item.material === selectedMaterialId)} playerInventoryItem={playerIn.find(item => item.material === selectedMaterialId)} fetchPlayerInventory={fetchPlayerInventory}/> : <></>}
+    {showSellModal ? <SellModal authToken={authToken} showModal={showSellModal} setShowModal={setShowSellModal} currentMoney={playerStatus.money} materialPriceInfo={shopPrices.find(item => item.material === selectedMaterialId)} playerInventoryItem={playerIn.find(item => item.material === selectedMaterialId)} fetchPlayerInventory={fetchPlayerInventory}/> : <></>}
     <div>
         <div>
             <h1>{shopInfo.name}</h1>

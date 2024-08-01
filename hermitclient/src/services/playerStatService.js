@@ -17,7 +17,7 @@ export const playerTravel = (authToken, playerStatus, selectedTown) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(editedStatus),
-    }).then((res) => res.json())
+    })
 }
 
 export const restartPlayerStatus = (authToken) => {
@@ -33,5 +33,5 @@ export const restartPlayerStatus = (authToken) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(starterStatus),
-    }).then((res) => res.json())
+    })
 }

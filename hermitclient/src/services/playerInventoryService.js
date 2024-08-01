@@ -14,12 +14,15 @@ export const updatePlayerInventoryById = ( authToken, id, invBody) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(invBody),
-    }).then((res) => res.json())
+    })
 }
 
 export const deletePlayerInventoryItemById = ( authToken, id) => {
-    return fetch(`http://localhost:8088/playerinventory/${id}`, {
-        method: "DELETE"
+    return fetch(`http://localhost:8000/playerinventory/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": authToken
+        },
     })
 }
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { deletePlayerInventoryItemById, updatePlayerInventoryById } from "../services/playerInventoryService"
 import { Input } from "./form-elements/input"
 
-export default function SellModal ({ authToken, showModal, setShowModal, currentMoney, materialPriceInfo, playerInventoryItem}) {
+export default function SellModal ({ authToken, setShowModal, currentMoney, materialPriceInfo, playerInventoryItem, fetchPlayerInventory}) {
   const [materialQuantity, setMaterialQuantity] = useState(0)
   const [cost, setCost] = useState(0)
   const [updatedInv, setUpdatedInv] = useState({})
@@ -14,11 +14,12 @@ export default function SellModal ({ authToken, showModal, setShowModal, current
 
   const handleTransaction = () => {
     if (playerInventoryItem?.quantity === materialQuantity) {
-        deletePlayerInventoryItemById(playerInventoryItem?.id)
+        deletePlayerInventoryItemById(authToken, playerInventoryItem?.id)
     } else {
         updatePlayerInventoryById(authToken, updatedInv.material_id, updatedInv)
     }
     setShowModal(false)
+    fetchPlayerInventory()
   }
 
   useEffect(() => {
