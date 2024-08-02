@@ -2,14 +2,15 @@ import { useEffect, useState } from "react"
 import { deletePlayerInventoryItemById, updatePlayerInventoryById } from "../services/playerInventoryService"
 import { Input } from "./form-elements/input"
 import { playerSell } from "../services/playerStatService"
+import { Modal, Button } from 'react-bootstrap'
 
-export default function SellModal ({ authToken, setShowModal, playerStatus, materialPriceInfo, playerInventoryItem, fetchPlayerInventory}) {
-  const [materialQuantity, setMaterialQuantity] = useState(0)
+export default function SellModal ({ authToken, showModal, setShowModal, playerStatus, materialPriceInfo, playerInventoryItem, fetchPlayerInventory}) {
+  const [materialQuantity, setMaterialQuantity] = useState(1)
   const [cost, setCost] = useState(0)
   const [updatedInv, setUpdatedInv] = useState({})
 
   const handleQuantityChange = (e) => {
-    const newQuantity = Math.min(Math.max(1, parseInt(e.target.value) || 0), playerInventoryItem?.quantity || 0)
+    const newQuantity = Math.min(Math.max(1, parseInt(e.target.value) || 1), playerInventoryItem?.quantity || 1)
     setMaterialQuantity(newQuantity)
   }
 
@@ -30,24 +31,33 @@ export default function SellModal ({ authToken, setShowModal, playerStatus, mate
         "material_id": materialPriceInfo?.material,
         "quantity": playerInventoryItem?.quantity - materialQuantity
     })
-  }, [materialQuantity])
+  }, [materialQuantity, materialPriceInfo, playerInventoryItem])
 
-  return (<div>
-    <h2>How much {materialPriceInfo?.material_name} to sell?</h2>
-        <Input
+  return (
+    <Modal show={showModal} onHide={() => setShowModal(false)}>
+    <Modal.Header closeButton>
+      <Modal.Title>How much {materialPriceInfo?.material_name} to sell?</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+    <Input
           type="number"
           label="Amount"
           value={materialQuantity}
           min="1"
-          max={playerInventoryItem?.quantity}
+          max={playerInventoryItem?.quantity || 1}
           onChange={handleQuantityChange}
         />
       <p>Current Money: {playerStatus.money} gold</p>
-      <p>Profit: {cost} gold</p>
-        <button
-          onClick={handleTransaction}
-        >Confirm</button>
-        <button onClick={() => setShowModal(false)}>Cancel</button>
-      </div>
+      <p>Profit: {isNaN(cost) ? 0 : cost} gold</p>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={() => setShowModal(false)}>
+        Close
+      </Button>
+      <Button variant="primary" onClick={handleTransaction}>
+        Sell
+      </Button>
+    </Modal.Footer>
+  </Modal>
     )
 }

@@ -2,8 +2,9 @@ import { useEffect, useState } from "react"
 import { createPlayerInventoryItem, updatePlayerInventoryById } from "../services/playerInventoryService"
 import { Input } from "./form-elements/input"
 import { playerPurchase } from "../services/playerStatService"
+import { Modal, Button } from 'react-bootstrap'
 
-export default function BuyModal ({ authToken, setShowModal, playerStatus, materialPriceInfo, playerInventoryItem, fetchPlayerInventory}) {
+export default function BuyModal ({ authToken, showModal, setShowModal, playerStatus, materialPriceInfo, playerInventoryItem, fetchPlayerInventory}) {
   const [materialQuantity, setMaterialQuantity] = useState(0)
   const [cost, setCost] = useState(0)
   const [updatedInv, setUpdatedInv] = useState({})
@@ -35,9 +36,12 @@ export default function BuyModal ({ authToken, setShowModal, playerStatus, mater
   }, [materialQuantity, materialPriceInfo])
 
   return (
-    <div>
-        <h2>How much {materialPriceInfo?.material_name} to buy?</h2>
-        <Input
+    <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>How much {materialPriceInfo?.material_name} to buy?</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+      <Input
           type="number"
           label="Amount"
           value={materialQuantity}
@@ -47,10 +51,15 @@ export default function BuyModal ({ authToken, setShowModal, playerStatus, mater
         />
       <p>Current Money: {playerStatus.money} gold</p>
       <p>Cost: {cost} gold</p>
-        <button
-          className="button is-success"
-          onClick={handleTransaction}
-        >Confirm</button>
-        <button className="button" onClick={() => setShowModal(false)}>Cancel</button>
-  </div>)
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={() => setShowModal(false)}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleTransaction}>
+          Buy
+        </Button>
+      </Modal.Footer>
+    </Modal>
+)
 }
