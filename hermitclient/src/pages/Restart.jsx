@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { newPlayerInventory, restartPlayerInventory } from "../services/playerInventoryService"
 import { restartPlayerStatus } from "../services/playerStatService"
+import { Button } from 'react-bootstrap'
 
 export const Restart = ({authToken}) => {
     const navigate = useNavigate()
@@ -17,7 +18,7 @@ export const Restart = ({authToken}) => {
     }
     return <div>
         <h1>Are you sure you want to restart?</h1>
-        <button onClick={handleNoClick}>No</button>
-        <button onClick={handleYesClick}>Yes</button>
+        <Button variant="primary" onClick={handleNoClick}>No</Button>
+        <Button variant="secondary" onClick={handleYesClick}>Yes</Button>
     </div>
 }

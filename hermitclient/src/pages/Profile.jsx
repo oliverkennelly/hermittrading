@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Input } from "../components/form-elements/input"
 import { editPlayerUsername, getPlayerUsername } from "../services/userService"
 import { useNavigate } from "react-router-dom"
+import { Button } from "react-bootstrap"
 
 export const Profile = ({authToken}) => {
     const navigate = useNavigate()
@@ -53,7 +54,7 @@ export const Profile = ({authToken}) => {
             onChange={(e) => {
                 setLastName(e.target.value) }}
         />
-        <button onClick={handleCancel}>Cancel</button>
-        <button onClick={handleConfirm}>Confirm</button>
+        <Button variant="primary" onClick={handleCancel}>Cancel</Button>
+        <Button variant="secondary" onClick={handleConfirm}>Confirm</Button>
     </div>
 }

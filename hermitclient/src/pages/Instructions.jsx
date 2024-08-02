@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import { Button } from 'react-bootstrap'
 
 export const Instructions = () => {
     const navigate = useNavigate()
@@ -16,9 +17,9 @@ export const Instructions = () => {
             prices for their wares, and they'll buy your goods at different prices depending on the demands
             of the region. Traveling to each city takes a day of your time, so choose carefully!
         </p>
-        <button
+        <Button variant="primary"
         onClick={() => {
             navigate('/')
-        }}>Start your adventure!</button>
+        }}>Start your adventure!</Button>
     </main>
 }
