@@ -14,7 +14,8 @@ export const ApplicationViews = () => {
 
     let authToken = `Token ${JSON.parse(localStorage.getItem("game_token"))}`
 
-    return <BrowserRouter>
+    return <div style={{ backgroundColor: '#F2E5C8'}}>
+        <BrowserRouter>
         <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -32,4 +33,5 @@ export const ApplicationViews = () => {
             </Route>
         </Routes>
     </BrowserRouter>
+    </div>
 }
