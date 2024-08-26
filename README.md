@@ -26,3 +26,8 @@ Clone the repository from GitHub
 4. Navigate to the link at `Local:`
 5. Login with email `emily@lemmon.com` and password `lemmon`
 (Note: if any other user is desired for use, the emails can be found in the database, and all passwords are the user's last name.)
+
+## Credits
+Character art by me
+Pixel art by me and sourced from minecraft texture packs
+Map art by mattabouttown
